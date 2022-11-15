@@ -5,16 +5,16 @@ isopen= True
 
 class worker:
     def __init__(self,firstname,lastname,age,id,email,profession,salary,experience,department):
-        self.workerid
-        self.firstname
-        self.lastname
-        self.age
-        self.id
-        self.email
-        self.profession
-        self.salary
-        self.experience
-        self.department
+        self.workerid = len(workers)
+        self.firstname =firstname
+        self.lastname =lastname
+        self.age =age
+        self.id =id
+        self.email =email
+        self.profession =profession
+        self.salary = salary
+        self.experience = experience
+        self.department = department
   
 def Show():
     print('for add worker press 1')    
@@ -23,6 +23,10 @@ def Show():
     print('for view worker press 4')
     print('for view all workers press 5')  
     print('for exit press 6')      
+def workerdetails(workerid):
+    print("worker ",workerid,": { firstname: ",workers[workerid].firstname,"lastname: ",workers[workerid].lastname,"age: ",workers[workerid].age,"id: ",workers[workerid].id,"email: ",workers[workerid].email,"profession: ",workers[workerid].profession,"salary: ",workers[workerid].salary,"experience: ",workers[workerid].experience,"department: ",workers[workerid].department)
+
+
 def Exit():
     global isopen
     isopen = False
@@ -30,18 +34,23 @@ def AddWorker():
     print("pls enter a firstname,lastname,age,id,email,profession,salary,experience,department with ,")
     #omri,gigi,22,000,mail,proggramer,65000,3,a
     answer = input()
-    answer = answer.split()
-    newWorker = worker(answer['firstname'],answer['lastname'],answer['age'],answer['id'],answer['email'],answer['profession'],answer['salary'],answer['experience'],answer['department'])
+    answer = answer.split(',')
+    newWorker = worker(answer[0],answer[1],answer[2],answer[3],answer[4],answer[5],answer[6],answer[7],answer[8])
+    workers.append(newWorker)
+
+
 def RemoveWorker():
     print("RemoveWorker")
 def UpdateWorker():
     print("UpdateWorker")
 def ShowWorker():
-    print("ShowWorker")
+    select = int(input("which worker you want to see"))
+    workerdetails(select)
+    
 def ShowAllWorker():
-    workers
-    print("ShowAllWorker\n")
-    print(worker)
+    for wokerid in range(len(workers)):
+        workerdetails(wokerid)
+        
     
 functions = {1:AddWorker, 
              2:RemoveWorker,
