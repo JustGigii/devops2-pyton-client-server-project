@@ -1,4 +1,4 @@
-
+import os
 
 workers =[]
 isopen= True
@@ -65,23 +65,21 @@ def UpdateWorker():
                 case 1:
                     workers[select].firstname = value 
                 case 2:
-                        workers[select].lastname = value 
+                    workers[select].lastname = value 
                 case 3:
-                        workers[select].age = value
+                    workers[select].age = value
                 case 4:
-                        workers[select].id = value
+                    workers[select].id = value
                 case 5:
-                        workers[select].email = value
+                    workers[select].email = value
                 case 6:
-                        workers[select].profession = value
+                    workers[select].profession = value
                 case 7:
                     workers[select].salary = value
                 case 8:
                     workers[select].experience = value
                 case 9:
                     workers[select].department = value  
-                case 0: 
-                    updatemode= False
                 case _:
                     print("Worng number")
         else:
@@ -112,6 +110,9 @@ def main():
         Show()
         select = int(input())
         functions[select]()
+        input("pls press eny key to contune")
+        os.system("cls") #  os.system("clear") to linux
+        
     print('the program stop')
     
     
