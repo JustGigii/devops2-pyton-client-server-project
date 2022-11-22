@@ -1,21 +1,9 @@
 import os
-
+from  WorkeClassr import worker
 workers =[]
 isopen= True
 
-class worker:
-    def __init__(self,firstname,lastname,age,id,email,profession,salary,experience,department):
-        self.workerid = len(workers)
-        self.firstname =firstname
-        self.lastname =lastname
-        self.age =age
-        self.id =id
-        self.email =email
-        self.profession =profession
-        self.salary = salary
-        self.experience = experience
-        self.department = department
-  
+
 def Show():
     print('for add worker press 1')    
     print('for remove worker press 2')
@@ -31,8 +19,8 @@ def ShowUpdate():
    
    
 def workerdetails(workerid):
-    print("worker",workerid,": { firstname:",workers[workerid].firstname,"lastname:",workers[workerid].lastname,"age:",workers[workerid].age,"id:",workers[workerid].id,"email:",workers[workerid].email,"profession:",workers[workerid].profession,"salary:",workers[workerid].salary,"experience:",workers[workerid].experience,"department:",workers[workerid].department,"\n")
-
+    print("worker","\n")
+workerid,": { firstname:",workers[workerid].firstname,"lastname:",workers[workerid].lastname,"age:",workers[workerid].age,"id:",workers[workerid].id,"email:",workers[workerid].email,"profession:",workers[workerid].profession,"salary:",workers[workerid].salary,"experience:",workers[workerid].experience,"department:",workers[workerid].department,
 
 def Exit():
     global isopen
@@ -44,7 +32,7 @@ def AddWorker():
     #omri,gigi,22,000,mail,proggramer,65000,3,a
     answer = input()
     answer = answer.split(',')
-    newWorker = worker(answer[0],answer[1],answer[2],answer[3],answer[4],answer[5],answer[6],answer[7],answer[8])
+    newWorker = worker(len(workers),answer[0],answer[1],answer[2],answer[3],answer[4],answer[5],answer[6],answer[7],answer[8])
     workers.append(newWorker)
 
 
