@@ -1,16 +1,16 @@
 class worker:
-    def __init__(self,workerid, firstname,lastname,age,id,email,profession,salary,experience,department):
+    def __init__(self, workerid, firstname, lastname, age, id, email, profession, salary, experience, department):
         self.workerid = workerid
-        self.firstname =firstname
-        self.lastname =lastname
-        self.age =age
-        self.id =id
-        self.email =email
-        self.profession =profession
+        self.firstname = firstname
+        self.lastname = lastname
+        self.age = age
+        self.id = id
+        self.email = email
+        self.profession = profession
         self.salary = salary
         self.experience = experience
         self.department = department
-#   { 
+#   {
 #     "workerid" : 1,
 #     "firstname":"omri",
 #     "lastname":"gigi",
