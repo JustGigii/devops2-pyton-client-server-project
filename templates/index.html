@@ -9,6 +9,7 @@
     <h1>wellcome to worker system servise. you can do alot of options with this api</h1>
     <h2>to add new worker</h2>
     <h3>send post</h3>
+    <h4>/addworker</h4>
     <p>
         {
         "workerid" : id,
@@ -22,8 +23,15 @@
         "experience": experience,
         "department": "department"
         }
-
     </p>
+    <h2>to show all workers</h2>
+    <h3>send get</h3>
+    <h4>/workers</h4>
+    <p>you get list of json for all the workers in the system </p>
+    <h2>to show worker by id</h2>
+    <h3>send get</h3>
+    <h4>/worker/<workerid></h4>
+    <p>you get json for your requset the worker by the id in the system</p>
 </body>
 
 </html>

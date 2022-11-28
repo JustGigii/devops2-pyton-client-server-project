@@ -41,6 +41,16 @@ def getallworkes():
     response.status_code = 200
     return response
 
+@app.route('/worker/<workerid>', methods=['GET'])
+def getuser(workerid):
+    for worker in workers:
+        if worker['workerid'] == int(workerid):
+            response = jsonify(worker)
+            response.status_code = 200
+            return response
+    response = jsonify("worker no found")
+    response.status_code = 404
+    return response 
 
 if __name__ == "__main__":
     app.run(debug=True)
