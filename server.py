@@ -52,5 +52,32 @@ def getuser(workerid):
     response.status_code = 404
     return response 
 
+@app.route('/worker/<workerid>', methods=['DELETE'])
+def deleteuser(workerid):
+    for worker in workers:
+        if worker['workerid'] == int(workerid):
+            workers.remove(worker)
+            response = jsonify("succses to delete worker")
+            response.status_code = 200
+            return response
+    response = jsonify("worker no found")
+    response.status_code = 404
+    return response 
+
+@app.route("/worker", methods=['PUT'])
+def updateworker():
+    newWorker = request.get_json()
+    for workerin in workers:
+        if (newWorker['workerid'] == workerin['workerid']):
+            workers.remove(workerin)
+            workers.append(newWorker)
+            response = jsonify("worker update")
+            response.status_code = 200
+            return response
+    workers.append(newWorker)
+    response = jsonify("worker add to the system")
+    response.status_code = 200
+    return response
+
 if __name__ == "__main__":
     app.run(debug=True)

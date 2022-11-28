@@ -58,12 +58,13 @@ def AddWorker():
 
 def RemoveWorker():
     select = int(input("pls enter the workerid\n"))
-    workers.remove(workers[select])
+    print(requests.delete(url+'/worker/'+str(select)).text)
 
 
 def UpdateWorker():
     updatemode = True
     select = int(input("which worker you want to edit\n"))
+    updatemode =  json.loads(requests.get(url+'/worker/'+str(select)).text)
     while updatemode:
         ShowUpdate()
         selectupdate = int(input("which details you want to edit\n"))
@@ -71,32 +72,33 @@ def UpdateWorker():
             value = input("pls enter value\n")
             match selectupdate:
                 case 1:
-                    workers[select].firstname = value
+                    updatemode['firstname'] = value
                 case 2:
-                    workers[select].lastname = value
+                    updatemode['lastname'] = value
                 case 3:
-                    workers[select].age = value
+                   updatemode['age'] = int(value)
                 case 4:
-                    workers[select].id = value
+                   updatemode['id']= value
                 case 5:
-                    workers[select].email = value
+                   updatemode['email'] = value
                 case 6:
-                    workers[select].profession = value
+                   updatemode['profession'] = value
                 case 7:
-                    workers[select].salary = value
+                   updatemode['salary'] = int(value)
                 case 8:
-                    workers[select].experience = value
+                   updatemode['experience'] = int(value)
                 case 9:
-                    workers[select].department = value
+                   updatemode['department'] = value
                 case _:
                     print("Worng number")
         else:
+            print(requests.put(url+'/worker',json=updatemode).text)
             updatemode = False
 
 
 def ShowWorker():
     select = int(input("which worker you want to see\n"))
-    workerdetails(select)
+    print(requests.get(url+'/worker/'+str(select)).text)
 
 
 def ShowAllWorker():
