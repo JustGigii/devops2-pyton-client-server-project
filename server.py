@@ -2,7 +2,10 @@ import json
 from flask import Flask, request, jsonify, render_template
 from WorkeClassr import worker
 
-workers = []
+workers = [
+              {'workerid': 1, 'firstname': 'omri', 'lastname': 'gigi', 'age': 22, 'id': '000', 'email': 'mail', 'profession': 'proggramer', 'salary': 65000, 'experience': 3, 'department': 'a'},
+              {'workerid': 2, 'firstname': 'alon', 'lastname': 'choen', 'age': 34, 'id': '123', 'email': 'mail', 'profession': 'proggramer', 'salary': 65000, 'experience': 3, 'department': 'a'}
+          ]
 
 # Create an intance of Flask
 app = Flask(__name__)
@@ -17,12 +20,9 @@ def gethomepage():
 
 @app.route("/addworker", methods=['POST'])
 def addworker():
-    jsondata = request.get_data()
-    # newWorker = worker(int(jsondata["wokerid"]), jsondata["firstname"], jsondata["lastname"], int(jsondata["age"]), jsondata["id"],
-    #                    jsondata["email"], jsondata["profession"], int(jsondata["salary"]), int(jsondata["experience"]), jsondata["department"])
-    newWorker = json.loads(jsondata, object_hook=worker)
+    newWorker = request.get_json()
     for workerin in workers:
-        if (newWorker.wokerid == workerin.workerid):
+        if (newWorker['workerid'] == workerin['workerid']):
             response = jsonify("worker in the system")
             response.status_code = 400
             return response

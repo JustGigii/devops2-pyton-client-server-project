@@ -4,7 +4,7 @@ import json
 import requests
 # workers = []
 isopen = True
-
+url = "http://127.0.0.1:5000"
 
 def Show():
     print('for add worker press 1')
@@ -36,11 +36,23 @@ def AddWorker():
     # 1,omri,gigi,22,000,mail,proggramer,65000,3,a
     answer = input()
     answer = answer.split(',')
-    newWorker = worker(int(answer[0]), answer[1], answer[2], int(
-        answer[3]), answer[4], answer[5], answer[6], int(answer[7]), int(answer[8]), answer[9])
+    newWorker = {
+    "workerid" : int(answer[0]),
+    "firstname":answer[1],
+    "lastname":answer[2],
+    "age": int(answer[3]),
+    "id": answer[4],
+    "email": answer[5],
+    "profession":answer[6],
+    "salary": int(answer[7]),
+    "experience": int(answer[8]),
+    "department": answer[9]
+                }
+    # worker(int(answer[0]), answer[1], answer[2], int(
+    #     answer[3]), answer[4], answer[5], answer[6], int(answer[7]), int(answer[8]), answer[9])
     # workers.append(newWorker)
-    tojson = json.dumps(newWorker.__dict__)
-    x = requests.post("http://127.0.0.1:5000/addworker", json=tojson)
+    tojson = newWorker
+    x = requests.post(url+"/addworker", json=tojson)
     print(x.text)
 
 
@@ -57,27 +69,27 @@ def UpdateWorker():
         selectupdate = int(input("which details you want to edit\n"))
         if selectupdate != 0:
             value = input("pls enter value\n")
-            # match selectupdate:
-            #     case 1:
-            #         workers[select].firstname = value
-            #     case 2:
-            #         workers[select].lastname = value
-            #     case 3:
-            #         workers[select].age = value
-            #     case 4:
-            #         workers[select].id = value
-            #     case 5:
-            #         workers[select].email = value
-            #     case 6:
-            #         workers[select].profession = value
-            #     case 7:
-            #         workers[select].salary = value
-            #     case 8:
-            #         workers[select].experience = value
-            #     case 9:
-            #         workers[select].department = value
-            #     case _:
-            #         print("Worng number")
+            match selectupdate:
+                case 1:
+                    workers[select].firstname = value
+                case 2:
+                    workers[select].lastname = value
+                case 3:
+                    workers[select].age = value
+                case 4:
+                    workers[select].id = value
+                case 5:
+                    workers[select].email = value
+                case 6:
+                    workers[select].profession = value
+                case 7:
+                    workers[select].salary = value
+                case 8:
+                    workers[select].experience = value
+                case 9:
+                    workers[select].department = value
+                case _:
+                    print("Worng number")
         else:
             updatemode = False
 
@@ -90,7 +102,7 @@ def ShowWorker():
 def ShowAllWorker():
     # for wokerid in range(len(workers)):
     #     workerdetails(wokerid)
-    pass
+    print(requests.get(url+'/workers').text)
 
 
 functions = {1: AddWorker,
