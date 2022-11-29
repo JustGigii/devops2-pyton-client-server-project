@@ -14,3 +14,5 @@ CREATE TABLE `workers`.`workers` (
 ALTER TABLE `workers`.`workers` 
 ADD UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE;
 ;
+
+INSERT into workers(firstname,lastname,age,id,email,profession,salary,experience,department) VALUES ('omri','gigi',22,'000','mail','proggramer',65000,3,'a')
