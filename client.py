@@ -32,22 +32,22 @@ def Exit():
 
 
 def AddWorker():
-    print("pls enter a id,firstname,lastname,age,id,email,profession,salary,experience,department with ,")
-    # 1,omri,gigi,22,000,mail,proggramer,65000,3,a
+    print("pls enter a firstname,lastname,age,id,email,profession,salary,experience,department with ,")
+    # omri,gigi,22,000,mail,proggramer,65000,3,a
+    #yohan,tubiana,35,123,yohantubiana@gmail.com,devops,70000,1,b
     answer = input()
     answer = answer.split(',')
     newWorker = {
-    "workerid" : int(answer[0]),
-    "firstname":answer[1],
-    "lastname":answer[2],
-    "age": int(answer[3]),
-    "id": answer[4],
-    "email": answer[5],
-    "profession":answer[6],
-    "salary": int(answer[7]),
-    "experience": int(answer[8]),
-    "department": answer[9]
-                }
+    "firstname":answer[0],
+    "lastname":answer[1],
+    "age": int(answer[2]),
+    "id": answer[3],
+    "email": answer[4],
+    "profession":answer[5],
+    "salary": int(answer[6]),
+    "experience": int(answer[7]),
+    "department": answer[8]
+    }
     # worker(int(answer[0]), answer[1], answer[2], int(
     #     answer[3]), answer[4], answer[5], answer[6], int(answer[7]), int(answer[8]), answer[9])
     # workers.append(newWorker)
@@ -64,7 +64,8 @@ def RemoveWorker():
 def UpdateWorker():
     updatemode = True
     select = int(input("which worker you want to edit\n"))
-    updatemode =  json.loads(requests.get(url+'/worker/'+str(select)).text)
+    updateuser =  json.loads(requests.get(url+'/worker/'+str(select)).text)[0]
+    print(updateuser)
     while updatemode:
         ShowUpdate()
         selectupdate = int(input("which details you want to edit\n"))
@@ -72,27 +73,27 @@ def UpdateWorker():
             value = input("pls enter value\n")
             match selectupdate:
                 case 1:
-                    updatemode['firstname'] = value
+                    updateuser[0] = value
                 case 2:
-                    updatemode['lastname'] = value
+                    updateuser[2] = value
                 case 3:
-                   updatemode['age'] = int(value)
+                   updateuser[3] = int(value)
                 case 4:
-                   updatemode['id']= value
+                   updateuser[4]= value
                 case 5:
-                   updatemode['email'] = value
+                   updateuser[5] = value
                 case 6:
-                   updatemode['profession'] = value
+                   updateuser[6] = value
                 case 7:
-                   updatemode['salary'] = int(value)
+                   updateuser[7] = int(value)
                 case 8:
-                   updatemode['experience'] = int(value)
+                   updateuser[8] = int(value)
                 case 9:
-                   updatemode['department'] = value
+                   updateuser[9] = value
                 case _:
                     print("Worng number")
         else:
-            print(requests.put(url+'/worker',json=updatemode).text)
+            print(requests.put(url+'/worker',json=updateuser).text)
             updatemode = False
 
 
@@ -129,3 +130,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+#yohan,tubiana,35,123,yohantubiana@gmail.com,devops,70000,1,b
