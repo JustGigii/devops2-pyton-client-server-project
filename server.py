@@ -2,10 +2,10 @@ import json
 from flask import Flask, request, jsonify, render_template
 from WorkeClassr import worker
 
-workers = [
-              {'workerid': 1, 'firstname': 'omri', 'lastname': 'gigi', 'age': 22, 'id': '000', 'email': 'mail', 'profession': 'proggramer', 'salary': 65000, 'experience': 3, 'department': 'a'},
-              {'workerid': 2, 'firstname': 'alon', 'lastname': 'choen', 'age': 34, 'id': '123', 'email': 'mail', 'profession': 'proggramer', 'salary': 65000, 'experience': 3, 'department': 'a'}
-          ]
+# workers = [
+#               {'workerid': 1, 'firstname': 'omri', 'lastname': 'gigi', 'age': 22, 'id': '000', 'email': 'mail', 'profession': 'proggramer', 'salary': 65000, 'experience': 3, 'department': 'a'},
+#               {'workerid': 2, 'firstname': 'alon', 'lastname': 'choen', 'age': 34, 'id': '123', 'email': 'mail', 'profession': 'proggramer', 'salary': 65000, 'experience': 3, 'department': 'a'}
+#           ]
 
 # Create an intance of Flask
 app = Flask(__name__)
