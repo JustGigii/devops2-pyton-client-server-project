@@ -2,6 +2,7 @@ import os
 from WorkeClassr import worker
 import json
 import requests
+import re
 # workers = []
 isopen = True
 url = "http://127.0.0.1:5000"
@@ -25,6 +26,8 @@ def ShowUpdate():
 #     print(workerid, ": { firstname:", workers[workerid].firstname, "lastname:", workers[workerid].lastname, "age:", workers[workerid].age, "id:", workers[workerid].id, "email:", workers[
 #         workerid].email, "profession:", workers[workerid].profession, "salary:", workers[workerid].salary, "experience:", workers[workerid].experience, "department:", workers[workerid].department,)
 
+def valid(answer):
+    pass
 
 def Exit():
     global isopen
@@ -37,16 +40,20 @@ def AddWorker():
     #yohan,tubiana,35,123,yohantubiana@gmail.com,devops,70000,1,b
     answer = input()
     answer = answer.split(',')
+    while valid(answer) == False:
+        answer = input()
+        answer = answer.split(',')
+        
     newWorker = {
-    "firstname":answer[0],
-    "lastname":answer[1],
+    "firstname":answer[0], #[A-Z]
+    "lastname":answer[1], #[A-Z]
     "age": int(answer[2]),
-    "id": answer[3],
-    "email": answer[4],
-    "profession":answer[5],
+    "id": answer[3],      #d+7
+    "email": answer[4], # ___@___.com
+    "profession":answer[5], #[A-Z]
     "salary": int(answer[6]),
     "experience": int(answer[7]),
-    "department": answer[8]
+    "department": answer[8] #
     }
     # worker(int(answer[0]), answer[1], answer[2], int(
     #     answer[3]), answer[4], answer[5], answer[6], int(answer[7]), int(answer[8]), answer[9])
@@ -54,6 +61,7 @@ def AddWorker():
     tojson = newWorker
     x = requests.post(url+"/addworker", json=tojson)
     print(x.text)
+        
 
 
 def RemoveWorker():
@@ -143,3 +151,10 @@ def main():
 if __name__ == '__main__':
     main()
 #yohan,tubiana,35,123,yohantubiana@gmail.com,devops,70000,1,b
+
+# REGEX
+# flask
+# mysql
+# csv
+# datetime
+# os
