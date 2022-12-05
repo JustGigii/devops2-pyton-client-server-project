@@ -164,7 +164,7 @@ def updateworker():
         conncetion.commit()
         cursor.close()
         conncetion.close()
-        response = jsonify("worker add to the system")
+        response = jsonify("worker update in the system")
         response.status_code = 200
         return response
     

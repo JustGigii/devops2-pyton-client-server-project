@@ -93,7 +93,19 @@ def UpdateWorker():
                 case _:
                     print("Worng number")
         else:
-            print(requests.put(url+'/worker',json=updateuser).text)
+            worker = {
+                "workerid": int(updatemode[0]),
+                "firstname":updatemode[1],
+                "lastname":updatemode[2],
+                "age": int(updatemode[3]),
+                "id": updatemode[4],
+                "email": updatemode[5],
+                "profession":updatemode[6],
+                "salary": int(updatemode[7]),
+                "experience": int(updatemode[8]),
+                "department": updatemode[9]
+                }
+            print(requests.put(url+'/worker',json=worker).text)
             updatemode = False
 
 
