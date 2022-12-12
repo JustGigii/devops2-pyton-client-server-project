@@ -26,8 +26,7 @@ def ShowUpdate():
 #     print(workerid, ": { firstname:", workers[workerid].firstname, "lastname:", workers[workerid].lastname, "age:", workers[workerid].age, "id:", workers[workerid].id, "email:", workers[
 #         workerid].email, "profession:", workers[workerid].profession, "salary:", workers[workerid].salary, "experience:", workers[workerid].experience, "department:", workers[workerid].department,)
 
-def valid(answer): #[Omri,Gigi,22,000,mail,proggramer,65000,3,a]
-    print(answer[1])
+def valid(answer): #[Omri,Gigi,22,211881396,gigiomri@gmail.com,proggramer,65000,3,a] 
     if not re.search("^[A-Z][^A-Z0-9]*$", answer[0]):
         print("firstname must contain only uppercase letters.")
         return False
@@ -36,15 +35,36 @@ def valid(answer): #[Omri,Gigi,22,000,mail,proggramer,65000,3,a]
         print("lastname must contain only uppercase letters and no numbers.")
         return False
 
-    if not re.search("^\d{9}$", answer[3]):
-        print("ID must consist of exactly 7 digits.")
+    if (not re.search("^\d{9}$", answer[3]) ):
+        print("ID is not valid")
         return False
-
+    if (not valid_Id(answer[3])):
+        print("ID is not valid")
+        return False
     if not re.search("^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$", answer[4]):
         print("Invalid email address.")
         return False
     return True
 
+def valid_Id(id):
+    print("in"+ id)
+    x = [1,2,1,2,1,2,1,2,1]
+    id = int(id)
+    for i in range(9):
+        digit = id % 10
+        temp = x[i] * digit
+        if temp > 9 :
+            while temp:
+                sum += temp % 10 
+                temp / 10 
+        else:
+            sum += temp 
+        id = id / 10
+    print(sum)
+    if sum % 10 == 0 :
+        return True
+    else:
+        return False
 
 
 
@@ -57,29 +77,36 @@ def AddWorker():
     print("pls enter a firstname,lastname,age,id,email,profession,salary,experience,department with ,")
     # omri,gigi,22,000,mail,proggramer,65000,3,a
     #yohan,tubiana,35,123,yohantubiana@gmail.com,devops,70000,1,b
-    answer = input()
-    answer = answer.split(',')
-    while valid(answer)==False:
+    try:
         answer = input()
         answer = answer.split(',')
-        
-    newWorker = {
-    "firstname":answer[0], #[A-Z]
-    "lastname":answer[1], #[A-Z]
-    "age": int(answer[2]),
-    "id": answer[3],      #d+9
-    "email": answer[4], # ___@___.com
-    "profession":answer[5], #[A-Z]
-    "salary": int(answer[6]),
-    "experience": int(answer[7]),
-    "department": answer[8] #a+
-    }
+        while valid(answer)==False:
+            answer = input()
+            answer = answer.split(',')
+            
+        newWorker = {
+        "firstname":answer[0], #[A-Z]
+        "lastname":answer[1], #[A-Z]
+        "age": int(answer[2]),
+        "id": answer[3],      #d+9
+        "email": answer[4], # ___@___.com
+        "profession":answer[5], #[A-Z]
+        "salary": int(answer[6]),
+        "experience": int(answer[7]),
+        "department": answer[8] #a+
+        }        
+    except:
+         print("the input is incorrect")
     # worker(int(answer[0]), answer[1], answer[2], int(
     #     answer[3]), answer[4], answer[5], answer[6], int(answer[7]), int(answer[8]), answer[9])
     # workers.append(newWorker)
-    x = requests.post(url+"/addworker", json=newWorker)
-    print(x.text)
-        
+    # x = requests.post(url+"/addworker", json=newWorker)
+    # print(x.text)
+    try:
+        x = requests.post(url+"/addworker", json=newWorker)
+        print(x.text)
+    except:
+        print("cannot connect to the sever")
 
 
 def RemoveWorker():
