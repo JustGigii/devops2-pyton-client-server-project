@@ -1,4 +1,3 @@
-import json
 from flask import Flask, request, jsonify, render_template
 from flaskext.mysql import MySQL
 
