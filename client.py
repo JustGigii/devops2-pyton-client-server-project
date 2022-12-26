@@ -15,7 +15,8 @@ def Show():
     print('for view worker press 4')
     print('for view all workers press 5')
     print('for export all workers to csv press 6')
-    print('for exit press 7')
+    print('for import workers from csv press 7')
+    print('for exit press 8')
 
 
 def ShowUpdate():
@@ -175,25 +176,42 @@ def ShowAllWorker():
     print(requests.get(url+'/workers').text)
 
 def exportTocsv():
+    title = ['workerid','firstname','lastname','age','id','email','profession','salary','experience','department']
     name = input("how do you want to call the file")
     filename = name+'.csv'
     file = open(filename, 'w')
     writer = csv.writer(file)
-
+    writer.writerow(title)
     workers= json.loads(requests.get(url+'/workers').text)
     for worker in workers:
         writer.writerow(worker)
         
     file.close()
 
-    
+def inportFrmcsv():
+    print("in")
+    name = input("what is the file name")
+    filename = name+'.csv'
+    with open(filename) as csv_file:
+        data = csv.reader(csv_file)
+        array = []
+        ok = False
+        for row in list(data):
+            if not ok:
+                ok= True
+            else:
+                array.append(row)
+        print(array)
+
+
 functions = {1: AddWorker,
              2: RemoveWorker,
              3: UpdateWorker,
              4: ShowWorker,
              5: ShowAllWorker,
              6: exportTocsv,
-             7: Exit}
+             7: inportFrmcsv,
+             8: Exit}
 
 def main():
     print('welcome to the ultimate worker system\n')
