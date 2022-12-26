@@ -3,6 +3,7 @@ from WorkeClassr import worker
 import json
 import requests
 import re
+import csv
 # workers = []
 isopen = True
 url = "http://127.0.0.1:5000"
@@ -13,7 +14,8 @@ def Show():
     print('for update worker press 3')
     print('for view worker press 4')
     print('for view all workers press 5')
-    print('for exit press 6')
+    print('for export all workers to csv press 6')
+    print('for exit press 7')
 
 
 def ShowUpdate():
@@ -172,14 +174,26 @@ def ShowAllWorker():
     #     workerdetails(wokerid)
     print(requests.get(url+'/workers').text)
 
+def exportTocsv():
+    name = input("how do you want to call the file")
+    filename = name+'.csv'
+    file = open(filename, 'w')
+    writer = csv.writer(file)
 
+    workers= json.loads(requests.get(url+'/workers').text)
+    for worker in workers:
+        writer.writerow(worker)
+        
+    file.close()
+
+    
 functions = {1: AddWorker,
              2: RemoveWorker,
              3: UpdateWorker,
              4: ShowWorker,
              5: ShowAllWorker,
-             6: Exit}
-
+             6: exportTocsv,
+             7: Exit}
 
 def main():
     print('welcome to the ultimate worker system\n')
@@ -197,9 +211,9 @@ if __name__ == '__main__':
     main()
 #yohan,tubiana,35,123,yohantubiana@gmail.com,devops,70000,1,b
 
-# REGEX -in
+# REGEX -done
 # flask -done
 # mysql -done
 # csv  - to do
-# datetime -no
+# datetime - done
 # os -done
